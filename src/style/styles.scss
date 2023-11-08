@@ -1,0 +1,266 @@
+* {
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+}
+
+
+:root {
+
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    
+    color-scheme: light dark;
+    background-color: var(--baseColor);
+    color: var(--baseTextColor);
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+input, button {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--baseTextColor);
+}
+::placeholder {
+    color: var(--baseTextColorMuted);
+    opacity: 1;
+    font-size: 0.9rem;
+}
+::selection {
+    color: var(--accentTextColor);
+    background: var(--accentColorDarken);
+}
+
+
+body {
+    padding-top: 50px;
+
+}
+.toolbar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom: $baseBorderSize solid var(--baseColorDarken);
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(0deg, var(--baseColorDarken), var(--baseColor));
+    z-index: 1;
+    
+    &.toolbar__active {
+        border-bottom-color: var(--accentColor);
+    }
+
+    button {
+        padding: $baseNodePadding;
+        cursor: pointer;
+        &:not(:disabled):hover {
+            background-color: var(--baseColorDarken);
+            color: var(--accentColor);
+        }
+        &:disabled {
+            opacity: 0.2;
+        }
+        &.active {
+            background-color: var(--accentColor) !important;
+            color: var(--accentTextColor) !important;
+        }
+    }
+    
+    .toolbar__left {
+        button {
+            border-right: $baseBorderSize solid var(--baseColorDarken);
+        }
+    }
+    .toolbar__right {
+        button {
+            border-left: $baseBorderSize solid var(--baseColorDarken);
+        }
+    }
+}
+
+.timers {
+    border-collapse: collapse;
+    width: 100%;
+    user-select: none;
+    
+    .timer-row {
+        display: flex;
+        justify-content: stretch;
+        width: 100%;
+        transition: all 0.2s;
+        cursor: pointer;
+        border-bottom: $baseBorderSize solid var(--baseColorDarken);
+
+        &:hover {
+            background-color: var(--baseColorLighten);
+            div.timer-row__actions {
+                opacity: 1;
+            }
+        }
+
+        &.active, &.active input {
+            color: var(--accentTextColor);
+            background-color: var(--accentColor);
+            .icon {
+                color: var(--accentTextColor) !important
+            }
+        }
+
+        > div {
+            display: flex;
+            align-items: center;
+            padding: $baseNodePadding;
+            &.timer-row__time {
+                white-space: nowrap;
+                padding-right: 0;
+            }
+            &.timer-row__name {
+                width: 100%;
+                display: flex;
+                justify-content: stretch;
+                padding: 0;
+                > * {
+                    display: flex;
+                    width: 100%;
+                    padding: $baseNodePadding;
+                    outline: none;
+                }
+            }
+
+            &.timer-row__actions {
+                white-space: nowrap;
+                padding: 0;
+                opacity: 0;
+                transition: opacity 0.2s;
+
+                .icon {
+                    color: var(--accentColor);
+                    padding: $baseNodePadding;
+                }
+
+                button {
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    margin-right: 5px;
+                    border-radius: 100px;
+                    color: var(--accentColor);
+                    &:hover {
+                        background-color: var(--baseColorLighten);
+                        opacity: 1;
+                        color: var(--accentColor);
+                    }
+                }
+            }
+        }
+    }
+}    
+
+.time {
+    
+    & > span {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 30px;
+        padding: 0 5px;
+        background: var(--baseColorDarken);
+        color: var(--accentColor);
+        border-radius: $baseRadius;
+
+        & + span {
+            margin-left: 4px;
+        }
+
+        &.time__hours {
+            background: var(--secondColor);
+            color: var(--baseColor);
+            font-weight: bold;
+        }
+        &.time__minutes {
+            background: var(--accentColor);
+            color: var(--baseColor);
+            font-weight: bold;
+        }
+        &.time__seconds {
+            background: var(--baseTextColorMuted);
+            color: var(--baseColor);
+            opacity: 1;
+        }
+        &.muted {
+            background: var(--baseTextColorMuted);
+            color: var(--baseColor);
+            opacity: 0.4;
+        }
+    }
+
+    .toolbar > &.active {
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 $baseVerticalPadding;
+        & > span {
+            background-color: var(--accentColor);
+            color: var(--accentTextColor);
+            &.muted {
+                opacity: 0.2;
+            }
+        }
+    }
+    .active & {
+        & > span {
+            background-color: var(--baseColor);
+            color: var(--accentColor);
+            
+        }
+    }
+}
+
+form {
+    // position: fixed;
+    width: 100%;
+    bottom: 0;
+    
+    input {
+        padding: $baseNodePadding;
+        background: linear-gradient(180deg, var(--baseColorDarken), var(--baseColor));
+        display: block;
+        width: 100%;
+        outline: unset;
+    }
+}
+body, html, #app {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+}
+.export {
+    display: flex;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    padding: $baseNodePadding;
+    color: var(--baseTextColor);
+    background-color: var(--baseColorDarken);
+    font-size: 0.85rem;
+    width: 100%;
+    height: 100%;
+    outline: unset;
+    line-height: 2rem;
+}

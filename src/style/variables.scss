@@ -1,0 +1,38 @@
+$baseBorderSize: 2px;
+$baseHorizontalPadding: 15px;
+$baseVerticalPadding: 10px;
+
+$baseNodePadding: $baseVerticalPadding $baseHorizontalPadding;
+
+$baseRadius: 5px;
+
+
+html.theme-light {
+    --baseColor: #EEE;
+    --baseColorDarken: #DDD;
+    --baseColorLighten: #FFF;
+    
+    --baseTextColor: #23262d;
+    --baseTextColorMuted: #AAA;
+    
+    --accentColor: #14a367;
+    --accentColorDarken: rgb(18, 136, 87);
+    --accentTextColor: #273b33;
+
+    --secondColor: #db820d;
+}
+
+html.theme-dark {
+    --baseColor: #23262d;
+    --baseColorDarken: #1f2228;
+    --baseColorLighten: #353b45;
+
+    --baseTextColor: #a9b0bd;
+    --baseTextColorMuted: #484c55;
+
+    --accentColor: #4caf86;
+    --accentColorDarken: #37976f;
+    --accentTextColor: #273b33;
+
+    --secondColor: #bb8a49;
+}
